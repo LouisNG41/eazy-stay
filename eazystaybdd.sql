@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `property` (
   `name` varchar(20) NOT NULL,
   `adress` varchar(20) NOT NULL,
   `budget` int NOT NULL,
-  `type` enum('maison','appartement') NOT NULL,
+  `type` enum('house','apartment') NOT NULL,
   `photo` varchar(30) NOT NULL,
   PRIMARY KEY (`idProperty`)
 );
@@ -55,16 +55,16 @@ INSERT INTO `user` (`email`, `firstName`, `lastName`, `password`, `role`) VALUES
 ('judy.martinez@example.com', 'Judy', 'Martinez', 'pass10', 1);
 
 INSERT INTO `property` (`name`, `adress`, `budget`, `type`, `photo`) VALUES
-('Green Villa', '123 Elm St', 500, 'maison', 'green_villa.jpg'),
-('Blue House', '456 Oak St', 300, 'maison', 'blue_house.jpg'),
-('Red Apartment', '789 Pine St', 200, 'appartement', 'red_apartment.jpg'),
-('Yellow Condo', '321 Maple St', 350, 'appartement', 'yellow_condo.jpg'),
-('Purple Mansion', '654 Birch St', 800, 'maison', 'purple_mansion.jpg'),
-('Orange Loft', '987 Cedar St', 400, 'appartement', 'orange_loft.jpg'),
-('White Cottage', '135 Spruce St', 450, 'maison', 'white_cottage.jpg'),
-('Gray Duplex', '246 Fir St', 600, 'maison', 'gray_duplex.jpg'),
-('Black Studio', '357 Ash St', 250, 'appartement', 'black_studio.jpg'),
-('Brown Townhouse', '468 Willow St', 550, 'maison', 'brown_townhouse.jpg');
+('Green Villa', '123 Elm St', 500, 'house', 'green_villa.jpg'),
+('Blue House', '456 Oak St', 300, 'house', 'blue_house.jpg'),
+('Red Apartment', '789 Pine St', 200, 'apartment', 'red_apartment.jpg'),
+('Yellow Condo', '321 Maple St', 350, 'apartment', 'yellow_condo.jpg'),
+('Purple Mansion', '654 Birch St', 800, 'house', 'purple_mansion.jpg'),
+('Orange Loft', '987 Cedar St', 400, 'apartment', 'orange_loft.jpg'),
+('White Cottage', '135 Spruce St', 450, 'house', 'white_cottage.jpg'),
+('Gray Duplex', '246 Fir St', 600, 'house', 'gray_duplex.jpg'),
+('Black Studio', '357 Ash St', 250, 'apartment', 'black_studio.jpg'),
+('Brown Townhouse', '468 Willow St', 550, 'house', 'brown_townhouse.jpg');
 
 INSERT INTO `location` (`idUser`, `idProperty`, `dateDeb`, `dateFin`) VALUES
 (1, 1, '2024-01-01', '2024-01-10'),
