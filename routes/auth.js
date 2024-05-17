@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-const crypto = require("crypto");
 const con = require("../config/connection");
 
 router.post("/login", (req, res) => {
@@ -16,9 +15,10 @@ router.post("/signup", (req, res) => {
 
   const email = params.email.toLowerCase();
   const pwd = params.pwd;
+  const role = params.role;
 
-  const query = "INSERT INTO User (email, password, admin) VALUES (?,?,?);";
-  con.query(query, [email, pwd, false], (err, result) => {
+  const query = "INSERT INTO User (email, password, role) VALUES (?,?,?);";
+  con.query(query, [email, pwd, role], (err, result) => {
     if (err) throw err;
     console.log("User registered succesfully");
   });
