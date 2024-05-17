@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `location` (
 DROP TABLE IF EXISTS `property`;
 CREATE TABLE IF NOT EXISTS `property` (
   `idProperty` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
+  `desc` varchar(20) NOT NULL,
   `adress` varchar(20) NOT NULL,
   `budget` int NOT NULL,
   `type` enum('house','apartment') NOT NULL,
@@ -54,7 +54,7 @@ INSERT INTO `user` (`email`, `firstName`, `lastName`, `password`, `role`) VALUES
 ('ivan.rodriguez@example.com', 'Ivan', 'Rodriguez', 'pass9', 0),
 ('judy.martinez@example.com', 'Judy', 'Martinez', 'pass10', 1);
 
-INSERT INTO `property` (`name`, `adress`, `budget`, `type`, `photo`) VALUES
+INSERT INTO `property` (`desc`, `adress`, `budget`, `type`, `photo`) VALUES
 ('Green Villa', '123 Elm St', 500, 'house', 'green_villa.jpg'),
 ('Blue House', '456 Oak St', 300, 'house', 'blue_house.jpg'),
 ('Red Apartment', '789 Pine St', 200, 'apartment', 'red_apartment.jpg'),
