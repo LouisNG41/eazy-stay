@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 const con = require("../config/connection");
 const bodyParser = require("body-parser");
+const userRoutes = require("./routes");
 
 // Middleware
 app.use(
@@ -13,6 +14,7 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(userRoutes);
 
 con.connect((err) => {
   if (err) {
@@ -25,38 +27,3 @@ con.connect((err) => {
   });
 });
 
-app.get("/users", (req, res) => {
-  const query = "SELECT * FROM User";
-  con.query(query, (err, result) => {
-    if (err) {
-      console.error("Error executing query:", err.stack);
-      return res.status(500).send("Internal server error.");
-    }
-    res.status(200).send(result);
-  });
-});
-
-app.post("/login", (req, res) => {
-  const params = req.body;
-
-  const email = params.email.toLowerCase();
-  const pwd = params.password;
-});
-
-app.post("/signup", (req, res) => {
-  const params = req.body;
-
-  const email = params.email.toLowerCase();
-  const pwd = params.pwd;
-  const role = params.role;
-
-  const query = "INSERT INTO User (email, password, role) VALUES (?,?,?);";
-  con.query(query, [email, pwd, role], (err, result) => {
-    if (err) {
-      console.error("Error executing query:", err.stack);
-      return res.status(500).send("Internal server error.");
-    }
-    console.log("User registered successfully");
-    res.status(200).send("User registered successfully");
-  });
-});
