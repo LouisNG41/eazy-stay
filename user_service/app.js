@@ -15,7 +15,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 con.connect((err) => {
-  if (err) throw err;
+  if (err) {
+    console.error("Error connecting to the database:", err.stack);
+    return;
+  }
   console.log("Connected!");
   app.listen(port, () => {
     console.log(`Server app listening on port ${port}`);
@@ -25,8 +28,11 @@ con.connect((err) => {
 app.get("/users", (req, res) => {
   const query = "SELECT * FROM User";
   con.query(query, (err, result) => {
-    if (err) throw err;
-    res.send(result);
+    if (err) {
+      console.error("Error executing query:", err.stack);
+      return res.status(500).send("Internal server error.");
+    }
+    res.status(200).send(result);
   });
 });
 
@@ -46,7 +52,11 @@ app.post("/signup", (req, res) => {
 
   const query = "INSERT INTO User (email, password, role) VALUES (?,?,?);";
   con.query(query, [email, pwd, role], (err, result) => {
-    if (err) throw err;
-    console.log("User registered succesfully");
+    if (err) {
+      console.error("Error executing query:", err.stack);
+      return res.status(500).send("Internal server error.");
+    }
+    console.log("User registered successfully");
+    res.status(200).send("User registered successfully");
   });
 });
