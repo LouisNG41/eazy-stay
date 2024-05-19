@@ -31,7 +31,7 @@ const getDispoForProperty = (req, res) => {
 };
 
 const createReservation = (req, res) => {
-  const { idUser, idProperty, dateDeb, dateFin } = req.body;
+  const { idUser, idProperty, dateDeb, dateFin } = req.query;
 
   // Insérer la réservation dans la base de données
   const query = `INSERT INTO location (idUser, idProperty, dateDeb, dateFin) VALUES ("${idUser}", "${idProperty}", "${dateDeb}", "${dateFin}")`;
