@@ -15,10 +15,20 @@ const getUsers = (req, res) => {
 const login = (req, res) => {
   const { email, password } = req.body;
   const lowerCaseEmail = email.toLowerCase();
+  const query = "SELECT * FROM User WHERE email = ? AND password = ?";
   
-  // Add your login logic here (e.g., validate the user with the database)
-  
-  res.status(200).send("Login endpoint not implemented yet");
+  con.query(query, [lowerCaseEmail, password], (err, result) => {
+    if (err) {
+      console.error("Error executing query:", err.stack);
+      return res.status(500).send("Internal server error.");
+    }
+    if (result.length > 0) {
+      res.status(200).send("Bien connecté");
+    } else {
+      res.status(401).send("Erreur");
+    }
+  });
+
 };
 
 const signup = (req, res) => {
