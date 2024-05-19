@@ -14,7 +14,7 @@ app.use(
   );
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(express.json());
-  app.use(userRoutes);
+  app.use(locationRoutes);
   
   con.connect((err) => {
     if (err) {
