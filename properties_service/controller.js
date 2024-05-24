@@ -13,8 +13,9 @@ const getProperties = (req, res) => {
 };
 
 const addProperty = (req, res) => {
-    const { desc, adress, budget, type, photo } = req.body;
-    const query = `INSERT INTO Property (desc, adress, budget, type, photo) VALUES ("${desc}", "${adress}", "${budget}", "${type}", "${photo}");`;
+    const { description, adress, budget, type, photo } = req.body;
+    const query = `INSERT INTO Property (description, adress, budget, type, photo) VALUES ("${description}", "${adress}", "${budget}", "${type}", "${photo}");`;
+    console.log(query);
     con.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err.stack);
