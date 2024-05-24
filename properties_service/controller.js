@@ -1,17 +1,6 @@
 // controller.js
 const con = require("../config/connection");
 
-const getProperties = (req, res) => {
-  const query = "SELECT * from Property;";
-  con.query(query, (err, result) => {
-    if (err) {
-      console.error("Error executing query:", err.stack);
-      return res.status(500).send("Internal server error.");
-    }
-    res.status(200).send(result);
-  });
-};
-
 const addProperty = (req, res) => {
     const { description, adress, budget, type, photo } = req.body;
     const query = `INSERT INTO Property (description, adress, budget, type, photo) VALUES ("${description}", "${adress}", "${budget}", "${type}", "${photo}");`;
@@ -27,7 +16,7 @@ const addProperty = (req, res) => {
     });
 };
 
-const getPropertiesFromFilter = (req, res) => {
+const getProperties = (req, res) => {
   const { type, location, minBudget, maxBudget } = req.query;
   let query = "SELECT * FROM property WHERE 1=1";
 
@@ -57,5 +46,4 @@ const getPropertiesFromFilter = (req, res) => {
 module.exports = {
   getProperties,
   addProperty,
-  getPropertiesFromFilter
 };
