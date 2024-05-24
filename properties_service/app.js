@@ -21,7 +21,7 @@ con.connect((err) => {
     console.error("Error connecting to the database:", err.stack);
     return;
   }
-  console.log("Connected!");
+  console.log("Connected to properties service!");
   app.listen(port, () => {
     console.log(`Server app listening on port ${port}`);
   });
