@@ -42,7 +42,8 @@ const isValidDate = (dateString) => {
 };
 
 const createReservation = (req, res) => {
-  const { idUser, idProperty, dateDeb, dateFin } = req.query;
+  const { idUser, idProperty, dateDeb, dateFin } = req.body;
+  console.log(idUser, idProperty, dateDeb, dateFin)
 
   if (!idUser || !idProperty || !dateDeb || !dateFin) {
     return res.status(400).json({ message: "Toutes les données sont nécessaires pour créer une réservation." });
@@ -51,6 +52,9 @@ const createReservation = (req, res) => {
   // Valider les dates
   if (!isValidDate(dateDeb) || !isValidDate(dateFin)) {
     return res.status(400).json({ message: "Les dates fournies sont invalides." });
+  }
+  if ( dateDeb > dateFin) {
+    return res.status(400).json({ message: "Veuillez mettre une date de Fin apres la date de Début." });
   }
 
   // Insérer la réservation dans la base de données
@@ -66,7 +70,7 @@ const createReservation = (req, res) => {
 };
 
 const reservePropertyWithCriteria = async (req, res) => {
-  const { type, location, minBudget, maxBudget, idUser, dateDeb, dateFin } = req.query;
+  const { type, location, minBudget, maxBudget, idUser, dateDeb, dateFin } = req.body;
 
   if (!idUser || !dateDeb || !dateFin) {
     return res.status(400).json({ message: "id de l'utilisateur, date de début et date de fin sont nécessaires pour réserver une propriété." });
@@ -74,7 +78,7 @@ const reservePropertyWithCriteria = async (req, res) => {
 
   try {
     // Appel au service de propriétés pour obtenir les propriétés selon les critères
-    const propertiesResponse = await axios.get('http://localhost:8001/properties-filter', {
+    const propertiesResponse = await axios.get('http://localhost:8001/properties', {
       params: { type, location, minBudget, maxBudget }
     });
 
