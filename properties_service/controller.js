@@ -42,8 +42,22 @@ const getProperties = (req, res) => {
   });
 };
 
+const getPropertyById = (req, res) => {
+  const id = req.params.id;
+  let query = "SELECT * FROM property WHERE idProperty = ?";
+  
+  con.query(query, [id], (err, result) => {
+    if (err) {
+      console.error("Error executing query:", err.stack);
+      return res.status(500).send("Internal server error.");
+    }
+    res.status(200).send(result);
+  });
+
+}
 
 module.exports = {
   getProperties,
   addProperty,
+  getPropertyById
 };

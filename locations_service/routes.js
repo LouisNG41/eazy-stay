@@ -1,12 +1,13 @@
 // routes.js
 const express = require("express");
 const router = express.Router();
-const { getDispoForProperty, createReservation, reservePropertyWithCriteria } = require("./controller");
+const { getPropertyAvailability, createReservation, createReservationPropertyWithCritera, getReservations } = require("./controller");
 
 
-router.get("/check-availability", getDispoForProperty);
-router.post("/create-reservation", createReservation);
-router.post("/create-reservation-with-criteria", reservePropertyWithCriteria);
+router.get("/availability", getPropertyAvailability);
+router.get("/reservations", getReservations);
+router.post("/reservation", createReservation);
+router.post("/reservationWithCriteria", createReservationPropertyWithCritera);
 
 
 module.exports = router;

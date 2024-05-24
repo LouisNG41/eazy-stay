@@ -12,6 +12,18 @@ const getUsers = (req, res) => {
   });
 };
 
+const getUserById = (req, res) => {
+  const id = req.params.id;
+  const query = "SELECT * FROM User WHERE idUser = ?";
+  con.query(query, [id], (err, result) => {
+    if (err) {
+      console.error("Error executing query:", err.stack);
+      return res.status(500).send("Internal server error.");
+    }
+    res.status(200).send(result);
+  });
+};
+
 const login = (req, res) => {
   const { email, password } = req.body;
   const lowerCaseEmail = email.toLowerCase();
@@ -48,6 +60,7 @@ const signup = (req, res) => {
 
 module.exports = {
   getUsers,
+  getUserById,
   login,
   signup,
 };

@@ -2,7 +2,22 @@
 const con = require("../config/connection");
 const axios = require("axios");
 
-const getDispoForProperty = (req, res) => {
+const getReservations = (req,res) => {
+  query = "SELECT * FROM Location;";
+
+  con.query(query, (err, result) => {
+    const query = "SELECT * FROM Location";
+    con.query(query, (err, result) => {
+      if (err) {
+        console.error("Error executing query:", err.stack);
+        return res.status(500).send("Internal server error.");
+      }
+      res.status(200).send(result);
+    });
+  });
+}
+
+const getPropertyAvailability = (req, res) => {
   const { id, dateDeb, dateFin} = req.query;
 
   if (!id) {
@@ -65,7 +80,7 @@ const createReservation = (req, res) => {
   });
 };
 
-const reservePropertyWithCriteria = async (req, res) => {
+const createReservationPropertyWithCritera = async (req, res) => {
   const { type, location, minBudget, maxBudget, idUser, dateDeb, dateFin } = req.query;
 
   if (!idUser || !dateDeb || !dateFin) {
@@ -90,7 +105,7 @@ const reservePropertyWithCriteria = async (req, res) => {
 
     // On vérifie si le bien est dispo
     try {
-      const dispoResponse = await axios.get('http://localhost:8002/check-availability', {
+      const dispoResponse = await axios.get('http://localhost:8002/checkAvailability', {
         params: { id : idProperty, dateDeb, dateFin }
       });
       isAvailable = dispoResponse.data.available;
@@ -122,7 +137,8 @@ const reservePropertyWithCriteria = async (req, res) => {
 };
 
 module.exports = {
-  getDispoForProperty,
+  getReservations,
+  getPropertyAvailability,
   createReservation,
-  reservePropertyWithCriteria
+  createReservationPropertyWithCritera
   };
