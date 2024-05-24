@@ -32,11 +32,11 @@ const login = (req, res) => {
 };
 
 const signup = (req, res) => {
-  const { email, pwd, role } = req.body;
+  const { email, firstName, lastName, password, role } = req.body;
   const lowerCaseEmail = email.toLowerCase();
-  const query = "INSERT INTO User (email, password, role) VALUES (?,?,?);";
+  const query = "INSERT INTO User (email, firstName, lastName, password, role) VALUES (?,?,?,?,?);";
   
-  con.query(query, [lowerCaseEmail, pwd, role], (err, result) => {
+  con.query(query, [lowerCaseEmail, firstName, lastName, password, role], (err, result) => {
     if (err) {
       console.error("Error executing query:", err.stack);
       return res.status(500).send("Internal server error.");
