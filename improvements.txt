@@ -1,0 +1,3 @@
+- Use query binding
+- Use req.body for non-GET requests
+- Translate french to english
