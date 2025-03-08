@@ -46,8 +46,8 @@ Chaque service suit une architecture standard :
 
 Autres fichiers importants :
 
-- `` : Script SQL pour créer la base de données
-- `` : Suggestions d'améliorations futures
+- `eazystaybdd.sql` : Script SQL pour créer la base de données
+- `improvements.txt` : Suggestions d'améliorations futures
 
 ## ⚙️ Installation et exécution
 
